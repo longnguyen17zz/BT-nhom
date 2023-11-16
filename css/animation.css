@@ -1,0 +1,67 @@
+/* .progress {
+    height: 3px;
+    width: 0%;
+    background-color: red;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    animation: progress 1s linear;
+    z-index: 999;
+}
+
+@keyframes progress {
+    to {
+        background-color:red;
+        width: 100%;
+    }
+} */
+
+.toast {
+    width: 300px;
+    height: 50px;
+    padding: 10px 15px;
+    background: lightgreen;
+    position: absolute;
+    transform: translate(150%);
+    animation: moveleft 0.5s linear forwards;
+    transition: 0.5s;
+    z-index: 9999;
+}
+
+.toast:not(.show) {
+    display: block;
+}
+
+@keyframes moveleft {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.toast::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+    height: 5px;
+    background: #009900;
+    animation: anim 2s linear forwards;
+}
+
+@keyframes anim {
+    100% {
+        width: 0;
+    }
+}
+
+/* :root * { */
+    /* Pause the animation */
+    /* animation-play-state: paused; */
+    /* Bind the animation to scroll */
+    /* animation-delay: calc(var(--scroll) * -1s); */
+    /* These last 2 properites clean up overshoot weirdness */
+    /* animation-iteration-count: 1; */
+    /* animation-fill-mode: both; */
+/* } */
