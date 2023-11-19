@@ -64,7 +64,7 @@ define('CART_PATH', '../');
                 </div>
                 <div class="col-md-8" style="width:60%;">
                     <h2 style="text-decoration:underline;">Giỏ hàng</h1>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered align-middle">
                             <thead class="text-center">
                                 <tr>
                                     <th>Id</th>
@@ -99,7 +99,7 @@ define('CART_PATH', '../');
         ?>
         <!--End Footer-->
     </main>
-    <script src="./js/action.js"></script>
+    <script src="../js/action.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

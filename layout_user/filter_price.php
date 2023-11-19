@@ -113,6 +113,9 @@ function display_filter_price()
 
 <body>
     <main>
+        <div style="position: absolute;top: 55px;left: 5px;font-size: 25px; z-index:999;" class="button_return hide-on-pc hide-on-tablet">
+            <a href="javascript:history.back()"><i style="color:#000;" class="fa-solid fa-arrow-right fa-rotate-180"></i></a>
+        </div>
         <?php
         include('../layout/contact_on_mobile.php');
         ?>

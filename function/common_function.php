@@ -439,7 +439,7 @@ function display_product_cart()
                                 <td class='text-center'>
                                     <div class='click_btn' style='display:flex;gap:25px;justify-content:center;'>
                                         <a href='../layout_user/product_detail.php?product_id=$product_id'>                                 
-                                        <button name='update-product'  type='submit' style='padding: 5px 20px;background-color:#e14e4e;color:#fff;border:none;outline:none;border-radius:3px;'    
+                                        <button name='update-product'  type='submit' style='padding: 5px 20px;background-color:#e14e4e;color:#fff;border:none;outline:none;border-radius:3px; width: 120px;'    
                                         value='Update'>Mua thêm</button>
                                         </a>
                                         <form action='delete-product.php' method='POST' >
@@ -448,10 +448,7 @@ function display_product_cart()
                                             name='remove-cart'>Xóa
                                             </button>
                                         </form>
-                                        <form class='' action='delete-product.php' method='POST'>
-                                            <input type='submit' class='btn btn-warning delete-select' style='width: 100px;margin-bottom:10px;' name='delete_select' value='Xóa chọn'></input>
-                                            <input type='checkbox' name ='product[]' style='margin-left:20px;border: 2px solid #000;' value='".$product_id."' class='form-check-input'>
-                                        </form>
+                                       
                                     </div>
                                 </td>
                             </tr>

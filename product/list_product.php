@@ -28,6 +28,9 @@ define('CART_PATH', '../');
 
 <body>
     <main>
+        <div style="position: absolute;top: 55px;left: 5px;font-size: 25px; z-index:999;" class="button_return hide-on-pc hide-on-tablet">
+            <a href="javascript:history.back()"><i style="color:#000;" class="fa-solid fa-arrow-right fa-rotate-180"></i></a>
+        </div>
         <!--Header-->
         <?php
             include('../layout/header.php');
@@ -55,7 +58,6 @@ define('CART_PATH', '../');
                         <?php 
                         display_product_cart();
                         ?>
-
                     </table>
 
                     <!--Subtotal-->
@@ -71,7 +73,7 @@ define('CART_PATH', '../');
                         </button>
                     </a>
                     <a href="checkout.php">
-                        <button class="btn btn-secondary">
+                        <button class=" btn btn-secondary">
                             Thanh toán
                         </button>
                     </a>
@@ -94,12 +96,12 @@ define('CART_PATH', '../');
                                 ?>
                             </strong></h4>
                         <a href="../layout_user/index.php">
-                            <button class="btn btn-primary" style="margin-right: 10px;">
+                            <button class="continue_buy btn btn-primary" style="margin-right: 10px;">
                                 Tiếp tục mua hàng
                             </button>
                         </a>
                         <a href="checkout.php">
-                            <button class="btn btn-secondary">
+                            <button class="btn_pay btn btn-secondary">
                                 Thanh toán
                             </button>
                         </a>

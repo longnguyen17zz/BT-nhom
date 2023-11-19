@@ -46,14 +46,14 @@ function orders_pagination()
         $status = $row['order_status'];
         
         echo "<tr>
-                <th scope='row'>$order_id</th>
-                <td>$name_orders</td>
-                <td>$email</td>
-                <td>$phone_orders</td>
-                <td>$address_orders</td>
-                <td>$order_date </td>
-                <td>$status</td>
-                <td>
+                <th class='text-center' scope='row'>$order_id</th>
+                <td class='text-center'>$name_orders</td>
+                <td class='text-center'>$email</td>
+                <td class='text-center'>$phone_orders</td>
+                <td class='text-center'>$address_orders</td>
+                <td class='text-center'>$order_date </td>
+                <td class='text-center'>$status</td>
+                <td class='text-center'>
                     <div style='display:flex;gap:5px;'>
                         <form method='POST' action='delete.php'>           
                             <input type='hidden' name ='order_id' value='$order_id'>  
@@ -178,11 +178,11 @@ function display_orders_number()
                     <hr>
 
                     <div class="mt-3">
-                        <table class="table align-middle">
-                            <thead>
+                        <table class="table table-bordered align-middle">
+                            <thead >
                                 <tr>
                                     <th class="text-center" scope="col">Mã đơn hàng</th>
-                                    <th class="text-center"scope="col">Tên người dùng</th>
+                                    <th class="text-center" scope="col">Tên người dùng</th>
                                     <th class="text-center" scope="col">Email</th>
                                     <th class="text-center" scope="col">Số điện thoại</th>
                                     <th class="text-center" scope="col">Địa chỉ</th>
@@ -198,7 +198,7 @@ function display_orders_number()
                         </table>
                         <ul class='pagination home-product__pagination'>
                             <li class='pagination-item '>
-                                <a href='' class='pagination-item__link'>
+                                <a href='' id="prevPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
@@ -208,7 +208,7 @@ function display_orders_number()
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='' class='pagination-item__link'>
+                                <a href='' id="nextPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon pagination-item__link'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>
@@ -241,6 +241,38 @@ function display_orders_number()
         </div>
         <!--End Main Layout -->
     </main>
+    <script>
+        <?php $page = isset($_GET['page']) ? $_GET['page'] : 1; ?>
+        var currentNumber = <?php echo $page; ?>;
+        console.log(currentNumber);
+        const list_number = document.querySelectorAll(".pagination-item__link");
+        const number = list_number.length-2;
+        console.log(number)
+        var prevButton = document.getElementById('prevPage');
+        var nextButton = document.getElementById('nextPage');
+
+        prevButton.addEventListener('click', function (event) {
+            event.preventDefault(); 
+            if (currentNumber > 1) {
+                currentNumber--; 
+                console.log(currentNumber)
+                updatePagination()
+            }
+        });
+
+        nextButton.addEventListener('click', function (event) {
+            event.preventDefault(); 
+            if (currentNumber < number) {
+                currentNumber++; 
+                console.log(currentNumber)
+                updatePagination() 
+            }
+
+        });
+        function updatePagination() {
+                    window.location.replace("order_mng.php?page=" + currentNumber);
+                }
+    </script>
     <script src="../bootstrap/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

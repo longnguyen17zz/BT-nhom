@@ -63,6 +63,9 @@ if (isset($_POST['ship_cod'])) {
 
 <body>
     <main>
+        <div style="position: absolute;top: 55px;left: 5px;font-size: 25px; z-index:999;" class="button_return hide-on-pc hide-on-tablet">
+            <a href="javascript:history.back()"><i style="color:#000;" class="fa-solid fa-arrow-right fa-rotate-180"></i></a>
+        </div>
         <!--Header-->
         <?php
         include('../layout/header.php');
@@ -97,16 +100,16 @@ if (isset($_POST['ship_cod'])) {
                             total_cart_price();
                             ?>">
                             <button class="btn btn-primary"
-                                style="margin-top:10px; display:flex; gap:1px; align-items:center;" type="submit"
+                                style="margin-top:10px; margin-bottom:20px; display:flex; gap:1px; align-items:center;" type="submit"
                                 name="payUrl">
                                 <img style="width:30px; height:30px;" src="../assets/momo.png" alt="">
                                 <span>Thanh toán MOMO</span>
                             </button>
                         </form>
                 </div>
-                <div class="col-md-8" style="width:60%;">
-                    <h2 style="text-decoration:underline;">Giỏ hàng</h1>
-                        <table class="table table-bordered">
+                <div class="col-md-8 hide-on-mobile" style="width:60%;">
+                    <h2 style="text-decoration:underline;">Giỏ hàng</h2>
+                        <table class="table table-bordered align-middle">
                             <thead class="text-center">
                                 <tr>
                                     <th>Id</th>
@@ -141,7 +144,7 @@ if (isset($_POST['ship_cod'])) {
         ?>
         <!--End Footer-->
     </main>
-    <script src="./js/action.js"></script>
+    <script src="../js/action.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>

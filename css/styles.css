@@ -415,8 +415,8 @@ hr {
     display: none;
 }
 
-.select-delete:nth-child(2) .text-center .click_btn .delete-select{
-    display: block;
+table tbody:first-child .delete-select{
+    display: block !important;
 }
 
 
@@ -599,6 +599,7 @@ hr {
 
     /* product */
     .product_view_detail .container {
+        margin-top: 0 !important;
         flex-wrap: wrap;
         gap: 0px;
     }
@@ -675,7 +676,14 @@ hr {
     .avatar-user::before {
         display: none;
     }
+     /* List_product */
+    .continue_buy {
+        width: 160px !important;
+    }
 
+    .btn_pay {
+        width: 110px;
+    }
 }
 
 /* 740px-767px */
@@ -738,6 +746,7 @@ hr {
     /* product */
    
     .product_view_detail .container {
+        margin-top: 0 !important;
         flex-wrap: wrap ;
         gap: 0px;
     }
@@ -1270,7 +1279,7 @@ hr {
 
 /* thêm */
 .product_view_detail .container {
-    margin-top: 100px !important;
+    margin-top: 100px;
     display: flex;
     gap: 50px;
     background: #fff;
