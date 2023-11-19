@@ -32,16 +32,20 @@ define('CART_PATH', '../');
 <body>
     <main>
         <?php
+        global $connect;
+        $results_per_page = 8;
+        $query = "SELECT * FROM `products`";
+        $result = mysqli_query($connect, $query);
+        $number_of_result = mysqli_num_rows($result);
+        // Determine the total number of pages available  
+        $number_of_page = ceil($number_of_result / $results_per_page);
+        $pageURL = intval($_GET['page']);
+        $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+        $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        ?>
+        <?php
         include('../layout/contact_on_mobile.php');
         ?>
-        <!-- <div class="menu-category-on-moblie hide-on-pc">
-            <label for="menu-checkbox" class="toogle-menu">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-                    <path
-                        d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z" />
-                </svg>
-            </label>
-        </div> -->
         <!--Header-->
         <?php
         include('../layout/header.php');
@@ -188,13 +192,13 @@ define('CART_PATH', '../');
                                 </div>
                                 <ul class="select-input__list">
                                     <li class="select-input__item">
-                                        <a href="filter_price.php?list=asc">
+                                        <a href="filter_price.php?price=asc">
                                             <input class="input_css" name="filter_low" type="submit"
                                                 value="Tăng dần">
                                         </a>
                                     </li>
                                     <li class="select-input__item">
-                                        <a href="filter_price.php?list=desc">
+                                        <a href="filter_price.php?price=desc">
                                             <input class="input_css input_css_border" name="filter_hight" type="submit"
                                                 value="Giảm dần">
                                         </a>
@@ -212,7 +216,7 @@ define('CART_PATH', '../');
 
                         <ul class='pagination home-product__pagination' style="margin: 30px 20px;">
                             <li class='pagination-item '>
-                                <a href='' id="prevPage" class='pagination-item__link'>
+                                <a href='../layout_user/index.php?page=<?php echo $pageURLPrev; ?>' id="prevPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
@@ -222,7 +226,7 @@ define('CART_PATH', '../');
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='' id="nextPage" class='pagination-item__link'>
+                                <a href='../layout_user/index.php?page=<?php echo $pageURLNext; ?>' id="nextPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>
@@ -259,38 +263,6 @@ define('CART_PATH', '../');
         });
     </script>
 
-    <script>
-        <?php $page = isset($_GET['page']) ? $_GET['page'] : 1; ?>
-        var currentNumber = <?php echo $page; ?>;
-        console.log(currentNumber);
-        const list_number = document.querySelectorAll(".pagination-item__link");
-        const number = list_number.length-2;
-        console.log(number)
-        var prevButton = document.getElementById('prevPage');
-        var nextButton = document.getElementById('nextPage');
-
-        prevButton.addEventListener('click', function (event) {
-            event.preventDefault(); 
-            if (currentNumber > 1) {
-                currentNumber--; 
-                console.log(currentNumber)
-                updatePagination()
-            }
-        });
-
-        nextButton.addEventListener('click', function (event) {
-            event.preventDefault(); 
-            if (currentNumber < number) {
-                currentNumber++; 
-                console.log(currentNumber)
-                updatePagination() 
-            }
-
-        });
-        function updatePagination() {
-                    window.location.replace("./index.php?page=" + currentNumber);
-                }
-    </script>
     <script src="../js/action.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

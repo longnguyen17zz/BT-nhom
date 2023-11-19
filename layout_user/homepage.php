@@ -33,6 +33,18 @@ define('CART_PATH', '../');
 <body>
     <main>
         <?php
+        global $connect;
+        $results_per_page = 8;
+        $query = "SELECT * FROM `products`";
+        $result = mysqli_query($connect, $query);
+        $number_of_result = mysqli_num_rows($result);
+        // Determine the total number of pages available  
+        $number_of_page = ceil($number_of_result / $results_per_page);
+        $pageURL = intval($_GET['page']);
+        $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+        $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        ?>
+        <?php
         include('../layout/contact_on_mobile.php');
         ?>
         <!--Header-->
@@ -201,7 +213,7 @@ define('CART_PATH', '../');
 
                         <ul class='pagination home-product__pagination'>
                             <li class='pagination-item '>
-                                <a href='' id="prevPage" class='pagination-item__link'>
+                                <a href='../layout_user/homepage.php?page=<?php echo $pageURLPrev; ?>' id="prevPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
@@ -211,7 +223,7 @@ define('CART_PATH', '../');
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='' id="nextPage" class='pagination-item__link'>
+                                <a href='../layout_user/homepage.php?page=<?php echo $pageURLNext; ?>' id="nextPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon pagination-item__link'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>
@@ -245,39 +257,6 @@ define('CART_PATH', '../');
             // Lưu vị trí cuộn trang trước khi tải lại trang
             sessionStorage.setItem("savedScrollPosition", window.scrollY);
         });
-    </script>
-
-    <script>
-        <?php $page = isset($_GET['page']) ? $_GET['page'] : 1; ?>
-        var currentNumber = <?php echo $page; ?>;
-        console.log(currentNumber);
-        const list_number = document.querySelectorAll(".pagination-item__link");
-        const number = list_number.length-2;
-        console.log(number)
-        var prevButton = document.getElementById('prevPage');
-        var nextButton = document.getElementById('nextPage');
-
-        prevButton.addEventListener('click', function (event) {
-            event.preventDefault(); 
-            if (currentNumber > 1) {
-                currentNumber--; 
-                console.log(currentNumber)
-                updatePagination()
-            }
-        });
-
-        nextButton.addEventListener('click', function (event) {
-            event.preventDefault(); 
-            if (currentNumber < number) {
-                currentNumber++; 
-                console.log(currentNumber)
-                updatePagination() 
-            }
-
-        });
-        function updatePagination() {
-                    window.location.replace("./homepage.php?page=" + currentNumber);
-                }
     </script>
     <script src="../js/action.js"></script>
     <script src="../bootstrap/bootstrap.js"></script>

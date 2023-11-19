@@ -108,6 +108,18 @@ function display_product_list()
 
 <body>
     <main>
+        <?php
+        global $connect;
+        $results_per_page = 8;
+        $query = "SELECT * FROM `products` where product_id like '$list%'";
+        $result = mysqli_query($connect, $query);
+        $number_of_result = mysqli_num_rows($result);
+        // Determine the total number of pages available  
+        $number_of_page = ceil($number_of_result / $results_per_page);
+        $pageURL = intval($_GET['page']);
+        $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+        $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        ?>
         <div style="position: absolute;top: 55px;left: 5px;font-size: 25px; z-index:999;" class="button_return hide-on-pc hide-on-tablet">
             <a href="javascript:history.back()"><i style="color:#000;" class="fa-solid fa-arrow-right fa-rotate-180"></i></a>
         </div>
@@ -190,42 +202,7 @@ function display_product_list()
             </div>
         </div>
         <!--End Introduction Brand-->
-        <!--Layout-->
-        <!-- <div class="menu-layout-mobile hide-on-pc hide-on-tablet"> -->
-            <!-- <input type="checkbox" name="" id="menu-checkbox" class="menu-checkbox" hidden> -->
-            <!-- overlay -->
-            <!-- <label for="menu-checkbox" class="overlay"></label> -->
-            <!-- menu content -->
-            <!-- <div class="menu-drawer">
-                <h4>Danh mục</h4>
-                <ul class="category-title-list">
-                    <li class="category-title-item">
-                        <i class="fa-solid fa-laptop"></i>
-                        <a href="#!" class="category-item-link">Laptop</a>
-                    </li>
-                    <li class="category-title-item">
-                        <i class="fa-solid fa-computer"></i>
-                        <a href="#!" class="category-item-link"> PC</a>
-                    </li>
-                    <li class="category-title-item">
-                        <i class="fa-solid fa-tv"></i>
-                        <a href="#!" class="category-item-link">Màn hình</a>
-                    </li>
-                    <li class="category-title-item">
-                        <i class="fa-solid fa-computer-mouse"></i>
-                        <a href="#!" class="category-item-link">Chuột</a>
-                    </li>
-                    <li class="category-title-item">
-                        <i class="fa-solid fa-keyboard"></i>
-                        <a href="#!" class="category-item-link">Bàn phím</a>
-                    </li>
-                    <li class="category-title-item">
-                        <i class="fa-solid fa-headphones"></i>
-                        <a href="#!" class="category-item-link">Tai nghe</a>
-                    </li>
-                </ul>
-            </div> -->
-        <!-- </div> -->
+        
         <div class="layout-main">
             <div class="container">
                 <div class="row row_1">
@@ -306,13 +283,13 @@ function display_product_list()
                                 </div>
                                 <ul class="select-input__list">
                                     <li class="select-input__item">
-                                        <a href="filter_price.php?price=asc">
+                                        <a href="filter_price_product.php?list=<?php echo $list;?>&price=asc">
                                             <input class="input_css" name="filter_low" type="submit"
                                                 value="Tăng dần">
                                         </a>
                                     </li>
                                     <li class="select-input__item">
-                                        <a href="filter_price.php?price=desc">
+                                        <a href="filter_price_product.php?list=<?php echo $list;?>&price=desc">
                                             <input class="input_css input_css_border" name="filter_hight" type="submit"
                                                 value="Giảm dần">
                                         </a>
@@ -329,7 +306,7 @@ function display_product_list()
 
                         <ul class='pagination home-product__pagination'>
                             <li class='pagination-item '>
-                                <a href='' id="prevPage" class='pagination-item__link'>
+                                <a href='../layout_user/filter_product.php?list=<?php echo $list;?>&page=<?php echo $pageURLPrev; ?>' id="prevPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
@@ -339,7 +316,7 @@ function display_product_list()
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='' id="nextPage" class='pagination-item__link'>
+                                <a href='../layout_user/filter_product.php?list=<?php echo $list;?>&page=<?php echo $pageURLNext; ?>' id="nextPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon pagination-item__link'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>

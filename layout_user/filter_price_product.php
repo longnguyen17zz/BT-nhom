@@ -10,26 +10,28 @@ define('LOGOUT_PATH', '../');
 define('CART_PATH', '../');
 
 $price = $_GET['price'];
+$list = $_GET['list'];
 function product_list()
 {
     global $connect;
     global $price;
+    global $list;
     $results_per_page = 8;
-    $query = "Select * from `products` order by product_price $price";
-    $result_query = mysqli_query($connect, $query);
-    $number_of_result = mysqli_num_rows($result_query);
+    $query = "Select * from `products` where product_id like '$list%' order by product_price $price";
+    $result = mysqli_query($connect, $query);
+    $number_of_result = mysqli_num_rows($result);
     // Determine the total number of pages available  
     $number_of_page = ceil($number_of_result / $results_per_page);
     // Determine which page number visitor is currently on  
     if (!isset($_GET['page'])) {
         $page = 1;
     } else {
-        $page = $_GET['page'];
+        $page = intval($_GET['page']);
     }
     $page_first_result = ($page - 1) * $results_per_page;
-    $query = "Select * from `products` order by product_price $price LIMIT " . $page_first_result . ',' . $results_per_page;
-    $result_query = mysqli_query($connect, $query);
-    while ($row = mysqli_fetch_assoc($result_query)) {
+    $query = "Select * from `products` where product_id like '$list%' order by product_price $price LIMIT " . $page_first_result . ',' . $results_per_page;
+    $result = mysqli_query($connect, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
         $product_id = $row['product_id'];
         $product_title = $row['product_title'];
         $product_price = $row['product_price'];
@@ -53,17 +55,17 @@ function product_list()
     }
 }
 
-function display_filter_price()
+function display_product_list()
 {
     global $connect;
-    global $price; 
+    global $list;
+    global $price;
     $results_per_page = 8;
-    $query = "Select * from `products` order by product_price $price";
+    $query = "Select * from `products` where product_id like '$list%' order by product_price $price";
     $result = mysqli_query($connect, $query);
     $number_of_result = mysqli_num_rows($result);
     // Determine the total number of pages available  
     $number_of_page = ceil($number_of_result / $results_per_page);
-    // print($number_of_page);
     // Determine which page number visitor is currently on  
     if (!isset($_GET['page'])) {
         $current_page = 1;
@@ -72,23 +74,19 @@ function display_filter_price()
     }
     $page_first_result = ($current_page - 1) * $results_per_page;
     // Retrieve the selected results from the database   
-    $query = "Select * from `products` order by product_price $price LIMIT " . $page_first_result . ',' . $results_per_page;
+    $query = "Select * from `products` where product_id like '$list%' order by product_price $price LIMIT " . $page_first_result . ',' . $results_per_page;
     $result = mysqli_query($connect, $query);
-    $current_page_class = 'pagination-item--active';
+    $page_class = 'pagination-item--active';
     for ($page = 1; $page <= $number_of_page; $page++) {
-        $class = ($page === $current_page) ? $current_page_class : '';
+        $class = ($page === $current_page) ? $page_class : '';
         if (!isset($_SESSION['email'])) {
-            echo "
-            <div style='display: flex;' class='" . $class . "'>
-                <a class='pagination-item__link' href='filter_price.php?price=$price&page=" . $page . "'>" . $page . "</a>
-            </div>
-        ";
+            echo "<div style='display: flex;' class='" . $class . "'>";
+            echo "<a class='pagination-item__link' href='filter_price_product.php?list=$list&price=$price&page=$page'>$page</a>";
+            echo "</div>";
         } else {
-            echo "
-            <div style='display: flex;' class='" . $class . "'>
-                <a class='pagination-item__link' href='filter_price.php?price=$price&page=" . $page . "'>" . $page . "</a>
-            </div>
-        ";
+            echo "<div style='display: flex;' class='" . $class . "'>";
+            echo "<a class='pagination-item__link' href='filter_price_product.php?list=$list&price=$price&page=$page'>$page</a>";
+            echo "</div>";
         }
     }
 }
@@ -116,7 +114,7 @@ function display_filter_price()
         <?php
         global $connect;
         $results_per_page = 8;
-        $query = "SELECT * FROM `products`";
+        $query = "SELECT * FROM `products` where product_id like '$list%' order by product_price $price";
         $result = mysqli_query($connect, $query);
         $number_of_result = mysqli_num_rows($result);
         // Determine the total number of pages available  
@@ -131,14 +129,6 @@ function display_filter_price()
         <?php
         include('../layout/contact_on_mobile.php');
         ?>
-        <!-- <div class="menu-category-on-moblie hide-on-pc">
-            <label for="menu-checkbox" class="toogle-menu">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-                    <path
-                        d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z" />
-                </svg>
-            </label>
-        </div> -->
         <!--Header-->
         <?php
         include('../layout/header.php');
@@ -269,7 +259,7 @@ function display_filter_price()
                             </li>
                             <li class="mobile-category__item">
                                 <a href="filter_product.php?list=HP" class="mobile-category__link button">
-                                    Bàn ghế gaming
+                                    Tai nghe
                                 </a>
                             </li>
                         </ul>
@@ -288,14 +278,14 @@ function display_filter_price()
                                 </div>
                                 <ul class="select-input__list">
                                     <li class="select-input__item">
-                                        <a href="filter_price.php?price=asc">
-                                            <input class="input_css" type="submit"
+                                        <a href="filter_price_product.php?list=<?php echo $list;?>&price=asc">
+                                            <input class="input_css" name="filter_low" type="submit"
                                                 value="Tăng dần">
                                         </a>
                                     </li>
                                     <li class="select-input__item">
-                                        <a href="filter_price.php?price=desc">
-                                            <input class="input_css input_css_border"  type="submit"
+                                        <a href="filter_price_product.php?list=<?php echo $list;?>&price=desc">
+                                            <input class="input_css input_css_border" name="filter_hight" type="submit"
                                                 value="Giảm dần">
                                         </a>
                                     </li>
@@ -311,17 +301,17 @@ function display_filter_price()
 
                         <ul class='pagination home-product__pagination'>
                             <li class='pagination-item '>
-                                <a href='../layout_user/filter_price.php?page=<?php echo $pageURLPrev; ?>' id="prevPage" class='pagination-item__link'>
+                                <a href='' id="prevPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
 
                             <?php
-                            display_filter_price();
+                            display_product_list();
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='../layout_user/filter_price.php?page=<?php echo $pageURLNext; ?>' id="nextPage" class='pagination-item__link'>
+                                <a href='' id="nextPage" class='pagination-item__link'>
                                     <i class='pagination-item__icon pagination-item__link'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>
@@ -357,7 +347,7 @@ function display_filter_price()
             sessionStorage.setItem("savedScrollPosition", window.scrollY);
         });
     </script>
-
+    
     <script src="../js/action.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
