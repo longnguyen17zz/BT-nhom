@@ -618,36 +618,72 @@ function login()
     }
 }
 
-function register()
+// function register()
+// {
+
+//     global $connect;
+//     if (isset($_POST['insert-user'])) {
+//         $email = $_POST['email'];
+//         $password = $_POST['password'];
+
+//         $hashed_password = password_hash($password,PASSWORD_DEFAULT);
+
+//         $check_query = "select * from `users` where email='$email'";
+//         $check_result = mysqli_query($connect, $check_query);
+//         if (mysqli_num_rows($check_result) > 0) {
+//             echo "<script>alert('Email đã tồn tại trong cơ sở dữ liệu. Vui lòng chọn email khác.')</script>";
+//             echo "<script>window.location.href='http://localhost/ecommerce/login-register/register.php';</script>";
+//             exit();
+//         } else {
+//             $insert_query = "insert into `users`(email,password,role) VALUES ('$email','$hashed_password','user')";
+//             $result_query = mysqli_query($connect, $insert_query);
+//             if ($result_query) {
+//                 echo "<script>alert('Tạo mới người dùng thành công !')</script>";
+//                 echo "<script>window.location.href='http://localhost/ecommerce/login-register/login.php';</script>";
+//                 exit();
+//             } else {
+//                 echo "<script>alert('Đã xảy ra lỗi khi đăng ký!')</script>";
+//                 echo "<script>window.location.href='http://localhost/ecommerce/login-register/login.php';</script>";
+//                 exit();
+//             }
+//         }
+
+//     }
+// }
+
+function ship_cod()
 {
-
     global $connect;
-    if (isset($_POST['insert-user'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+    if (isset($_POST['shipCOD'])) {
+        $email = $_SESSION['email'];
+        // $cart_query = "select * from `cart` where email = '$email'";
+        $order_status = 'Đang xử lý';
+        $user_id = $_SESSION['id'];
+        $name_orders = $_POST['name_orders'];
+        $phone_orders = $_POST['phone_orders'];
+        $address_orders = $_POST['address_orders'];
+        $total_cart_query = "select quantity FROM cart WHERE email = '$email'";
+        $total_cart_result = mysqli_query($connect, $total_cart_query);
+        if ($total_cart_result) {
+            $row = mysqli_fetch_assoc($total_cart_result);
+            $total_cart = $row['quantity'];
+            $insert_query = "insert into `orders` (user_id,total_products,order_status,name_orders,phone_orders,address_orders,email) values 
+            ($user_id, $total_cart , '$order_status','$name_orders','$phone_orders','$address_orders','$email')";
+            $result = mysqli_query($connect, $insert_query);
+            if ($result) {
+                $truncate_cart = "delete from cart where email ='$email'";
+                $truncate_query = mysqli_query($connect, $truncate_cart);
 
-        $hashed_password = password_hash($password,PASSWORD_DEFAULT);
-
-        $check_query = "select * from `users` where email='$email'";
-        $check_result = mysqli_query($connect, $check_query);
-        if (mysqli_num_rows($check_result) > 0) {
-            echo "<script>alert('Email đã tồn tại trong cơ sở dữ liệu. Vui lòng chọn email khác.')</script>";
-            echo "<script>window.location.href='http://localhost/ecommerce/login-register/register.php';</script>";
-            exit();
-        } else {
-            $insert_query = "insert into `users`(email,password,role) VALUES ('$email','$hashed_password','user')";
-            $result_query = mysqli_query($connect, $insert_query);
-            if ($result_query) {
-                echo "<script>alert('Tạo mới người dùng thành công !')</script>";
-                echo "<script>window.location.href='http://localhost/ecommerce/login-register/login.php';</script>";
-                exit();
+                if ($truncate_query) {
+                    echo "<script>alert('Đặt hàng thành công')</script>";
+                } else {
+                    echo "<script>alert('Error truncating cart')</script>";
+                }
             } else {
-                echo "<script>alert('Đã xảy ra lỗi khi đăng ký!')</script>";
-                echo "<script>window.location.href='http://localhost/ecommerce/login-register/login.php';</script>";
-                exit();
+                echo "<script>alert('Error inserting order')</script>";
             }
+
         }
 
     }
 }
-

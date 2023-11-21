@@ -40,9 +40,15 @@ define('CART_PATH', '../');
         $number_of_result = mysqli_num_rows($result);
         // Determine the total number of pages available  
         $number_of_page = ceil($number_of_result / $results_per_page);
-        $pageURL = intval($_GET['page']);
-        $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
-        $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        if(isset($_GET['page'])){
+            $pageURL = intval($_GET['page']);
+            $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+            $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        }else {
+            $pageURL = 1;
+            $pageURLPrev = 1;
+            $pageURLNext = 2;
+        }
         ?>
         <?php
         include('../layout/contact_on_mobile.php');

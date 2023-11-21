@@ -67,16 +67,37 @@ function display_search_list()
 <body>
     <main>
         <?php
+        global $connect;
+        $product_search_name = $_GET['product_name'];
+        $results_per_page = 8;
+        $query = "SELECT * FROM `products`  where product_title like '%$product_search_name%'";
+        $result = mysqli_query($connect, $query);
+        $number_of_result = mysqli_num_rows($result);
+        // Determine the total number of pages available  
+        $number_of_page = ceil($number_of_result / $results_per_page);
+        if(isset($_GET['page'])){
+            $pageURL = intval($_GET['page']);
+            $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+            $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        }else {
+            if($number_of_page==1){
+                $pageURLPrev = 1;
+                $pageURLNext = 1;
+            }
+            else{
+                $pageURL = 1;
+                $pageURLPrev = 1;
+                $pageURLNext = 2;
+            }
+        }
+        ?>
+        <div style="position: absolute;top: 55px;left: 5px;font-size: 25px; z-index:999;" class="button_return hide-on-pc hide-on-tablet">
+            <a href="javascript:history.back()"><i style="color:#000;" class="fa-solid fa-arrow-right fa-rotate-180"></i></a>
+        </div>
+        <?php
         include('../layout/contact_on_mobile.php');
         ?>
-        <!-- <div class="menu-category-on-moblie hide-on-pc">
-            <label for="menu-checkbox" class="toogle-menu">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
-                    <path
-                        d="M438.6 150.6c12.5-12.5 12.5-32.8 0-45.3l-96-96c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.7 96 32 96C14.3 96 0 110.3 0 128s14.3 32 32 32l306.7 0-41.4 41.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l96-96zm-333.3 352c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 416 416 416c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0 41.4-41.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-96 96c-12.5 12.5-12.5 32.8 0 45.3l96 96z" />
-                </svg>
-            </label>
-        </div> -->
+       
         <!--Header-->
         <?php
             include('../layout/header.php');
@@ -226,16 +247,16 @@ function display_search_list()
                                 </div>
                                 <ul class="select-input__list">
                                     <li class="select-input__item">
-                                        <form action="">
+                                        <a href="" >
                                             <input class="input_css" name="filter_low" type="submit"
-                                                value="Thấp đến cao">
-                                        </form>
+                                                value="Tăng dần">
+                                        </a>
                                     </li>
                                     <li class="select-input__item">
-                                        <form action="">
+                                        <a href="" >
                                             <input class="input_css input_css_border" name="filter_hight" type="submit"
-                                                value="Cao đến thấp">
-                                        </form>
+                                                value="Giảm dần">
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -249,7 +270,7 @@ function display_search_list()
 
                         <ul class='pagination home-product__pagination'>
                             <li class='pagination-item '>
-                                <a href='' class='pagination-item__link'>
+                                <a href='../layout_user/search_product.php?product_name=<?php echo $product_search_name;?>&page=<?php echo $pageURLPrev;?>' class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
@@ -260,7 +281,7 @@ function display_search_list()
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='' class='pagination-item__link'>
+                                <a href='../layout_user/search_product.php?product_name=<?php echo $product_search_name;?>&page=<?php echo $pageURLNext;?>' class='pagination-item__link'>
                                     <i class='pagination-item__icon pagination-item__link'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>

@@ -116,9 +116,22 @@ function display_product_list()
         $number_of_result = mysqli_num_rows($result);
         // Determine the total number of pages available  
         $number_of_page = ceil($number_of_result / $results_per_page);
-        $pageURL = intval($_GET['page']);
-        $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
-        $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        if(isset($_GET['page'])){
+            $pageURL = intval($_GET['page']);
+            $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+            $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        }else {
+            if($number_of_page==1){
+                $pageURLPrev = 1;
+                $pageURLNext = 1;
+            }
+            else{
+                $pageURL = 1;
+                $pageURLPrev = 1;
+                $pageURLNext = 2;
+            }
+        }
+        
         ?>
         <div style="position: absolute;top: 55px;left: 5px;font-size: 25px; z-index:999;" class="button_return hide-on-pc hide-on-tablet">
             <a href="javascript:history.back()"><i style="color:#000;" class="fa-solid fa-arrow-right fa-rotate-180"></i></a>
