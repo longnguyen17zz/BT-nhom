@@ -50,7 +50,7 @@ define('CART_PATH', '../');
             <div class="header_payment_little">
                 <h1>HƯỚNG DẪN TRẢ GÓP</h1>
             </div>
-            <div class="container">
+            <div style="margin-top: 50px;" class="container">
                 <p>Đối với các quý khách hàng muốn mua sản phẩm của Tech Shop theo hình thức trả góp, Tech Shop có chính sách quẹt thẻ trực tiếp tại showroom để tiến hành trả góp. Vì vậy, Quý Khách cần lưu ý các thông tin sau khi trả góp.</p>
             </div>
             <h3>Trả góp qua thẻ tín dụng MPOS</h3>

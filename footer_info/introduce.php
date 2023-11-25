@@ -50,7 +50,7 @@ define('CART_PATH', '../');
                     </ul>
                 </div>
             </div>
-            <p class="intro">Giới thiệu</p>
+            <p style="margin-bottom: 50px;" class="intro">GIỚI THIỆU</p>
             <h1 class="intro-impor">Công ty TNHH Công Nghệ Tech_U</h1>
             <div class="intro">
                 <div class="title">

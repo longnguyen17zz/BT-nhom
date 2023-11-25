@@ -7,7 +7,7 @@
                     <ul class="list-action-footer">
                         <li class="list-action-item">
                             <a href="<?php echo FOOTER_PATH; ?>/payment.php">
-                                Hướng dẫn mua hàng
+                                Phương thức thanh toán
                             </a>
                         </li>
                         <li class="list-action-item">

@@ -18,11 +18,11 @@ if (isset($_POST['ship_cod'])) {
     $name_orders = $_POST['name_orders'];
     $phone_orders = $_POST['phone_orders'];
     $address_orders = $_POST['address_orders'];
-    $total_cart_query = "select quantity FROM cart WHERE email = '$email'";
+    $total_cart_query = "select sum(quantity) as sumquantity FROM cart WHERE email = '$email'";
     $total_cart_result = mysqli_query($connect, $total_cart_query);
     if ($total_cart_result) {
         $row = mysqli_fetch_assoc($total_cart_result);
-        $total_cart = $row['quantity'];
+        $total_cart = $row['sumquantity'];
         $insert_query = "insert into `orders` (user_id,total_products,order_status,name_orders,phone_orders,address_orders,email) values 
         ($user_id, $total_cart , '$order_status','$name_orders','$phone_orders','$address_orders','$email')";
         $result = mysqli_query($connect, $insert_query);

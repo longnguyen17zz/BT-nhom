@@ -73,19 +73,19 @@ define('CART_PATH', '../');
                 <p><strong>Thành viên</strong> là bao gồm cả người mua và người tham khảo thông tin, thảo luận tại
                     website.</p>
                 <p>Nội dung bản Quy chế này tuân thủ theo các quy định hiện hành của Việt Nam. Thành viên khi tham gia
-                    website TMĐT FPTshop.com.vn phải tự tìm hiểu trách nhiệm pháp lý của mình đối với luật pháp hiện
+                    website TMĐT Techshop.com.vn phải tự tìm hiểu trách nhiệm pháp lý của mình đối với luật pháp hiện
                     hành của Việt Nam và cam kết thực hiện đúng những nội dung trong Quy chế này.</p>
             </div>
             <div class="transport">
                 <strong>III.Quy trình giao dịch</strong><br><br>
                 <strong>Quy trình giao vận chuyển</strong>
-                <p>- FPTshop.com.vn thực hiện giao hàng trên toàn quốc. Khi nhận đơn hàng từ người mua và sau khi đã xác
+                <p>- Techshop.com.vn thực hiện giao hàng trên toàn quốc. Khi nhận đơn hàng từ người mua và sau khi đã xác
                     nhận thông tin mua hàng qua điện thoại, Tech Shop sẽ tiến hành giao hàng theo yêu cầu của quý khách
                     hàng:</p>
-                <p>- Giữ hàng tại các cửa hàng của FPTShop trên toàn quốc và người mua sẽ đến trực tiếp cửa hàng kiểm
+                <p>- Giữ hàng tại các cửa hàng của Techshop trên toàn quốc và người mua sẽ đến trực tiếp cửa hàng kiểm
                     tra và nhận hàng.</p>
                 <p>- Giao hàng tận nơi trên toàn bộ 63 tỉnh thành</p>
-                <p>- FPT Shop nhận giao đơn hàng có thời gian hẹn giao tại nhà trước 21h00 đối với Điện thoại, Máy tính
+                <p>- Tech Shop nhận giao đơn hàng có thời gian hẹn giao tại nhà trước 21h00 đối với Điện thoại, Máy tính
                     bảng và trước 20h00 đối với Máy tính xách tay.</p>
                 <p>- Miễn phí giao hàng trong bán kính 20km có đặt shop.</p>
                 <p>- Với những đơn hàng giao tại nhà và có giá trị từ 50 triệu đồng trở lên, Quý khách vui lòng thanh
@@ -101,7 +101,7 @@ define('CART_PATH', '../');
                 <p>- Trong trường hợp giao dịch nhận hàng tại nhà của người mua, thì người mua chỉ nên thanh toán sau
                     khi đã kiểm tra hàng hoá chi tiết và hài lòng với sản phẩm.</p>
                 <p>- Khi thanh toán trực tuyến bằng thẻ ATM nội địa, Visa, Master người mua nên tự mình thực hiện và
-                    không được để lộ thông tin thẻ. FPTshop.com.vn không lưu trữ thông tin thẻ của người mua sau khi
+                    không được để lộ thông tin thẻ. Techshop.com.vn không lưu trữ thông tin thẻ của người mua sau khi
                     thanh toán, mà thông qua hệ thống của ngân hàng liên kết. Nên tuyệt đối bảo mật thông tin thẻ cho
                     khách hàng.</p>
                 <p>- Trong trường lỗi xảy ra trong quá trình thanh toán trực tuyến, Công ty bán lẻ kỹ thuật số sẽ là đơn
@@ -129,12 +129,12 @@ define('CART_PATH', '../');
             </div>
             <div class="">
                 <strong>VI.Điều khoản áp dụng</strong><br><br>
-                <p>- Mọi tranh chấp phát sinh giữa Website TMĐT FPTshop.com.vn và thành viên sẽ được giải quyết trên cơ
+                <p>- Mọi tranh chấp phát sinh giữa Website TMĐT Techshop.com.vn và thành viên sẽ được giải quyết trên cơ
                     sở thương lượng. Trường hợp không đạt được thỏa thuận như mong muốn, một trong hai bên có quyền đưa
-                    vụ việc ra Tòa án nhân dân có thẩm quyền tại Thành phố Hồ Chí Minh để giải quyết.</p>
-                <p>- Quy chế của Website TMĐT FPTshop.com.vn chính thức có hiệu lực thi hành kể từ ngày ký Quyết định
-                    ban hành kèm theo Quy chế này. Website TMĐT FPTshop.com.vn có quyền và có thể thay đổi Quy chế này
-                    bằng cách thông báo lên Website TMĐT FPTshop.com.vn cho các thành viên biết. Quy chế sửa đổi có hiệu
+                    vụ việc ra Tòa án nhân dân có thẩm quyền tại Thành phố Hà Nội để giải quyết.</p>
+                <p>- Quy chế của Website TMĐT Techshop.com.vn chính thức có hiệu lực thi hành kể từ ngày ký Quyết định
+                    ban hành kèm theo Quy chế này. Website TMĐT Techshop.com.vn có quyền và có thể thay đổi Quy chế này
+                    bằng cách thông báo lên Website TMĐT Techshop.com.vn cho các thành viên biết. Quy chế sửa đổi có hiệu
                     lực kể từ ngày Quyết định về việc sửa đổi Quy chế có hiệu lực. Việc thành viên tiếp tục sử dụng dịch
                     vụ sau khi Quy chế sửa đổi được công bố và thực thi đồng nghĩa với việc họ đã chấp nhận Quy chế sửa
                     đổi này.</p>

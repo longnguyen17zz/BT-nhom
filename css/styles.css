@@ -422,10 +422,15 @@ table tbody:first-child .delete-select{
 
 /*Responsive Navbar*/
 
-@media(max-width:493.98px) {
+@media(max-width:490px) {
     .product-filter {
         font-size: 16px !important;
         gap: 20px !important;
+    }
+
+    
+    .pagination-item__link{
+        min-width: 25px !important;
     }
     
 
@@ -591,7 +596,7 @@ table tbody:first-child .delete-select{
     /* home-product__pagination  */
 
     .pagination-item__link {
-        min-width      : 30px !important;
+        min-width: 30px !important;
     }
 
     
@@ -618,7 +623,7 @@ table tbody:first-child .delete-select{
 
     /* ship */
 
-    .header_pay h1,.header_ship h1,.header_payment_little h1{
+    .header_pay h1,.header_ship h1,.header_payment_little h1,.header_payment_little h1{
         font-size: 20px !important;
         font-weight: 200 !important;
     }
@@ -1685,7 +1690,7 @@ iframe {
     color: #000; 
 }
 
-.header_pay h1,.header_ship h1,.header_provision h1,.header_recruit h1{
+.header_pay h1,.header_ship h1,.header_provision h1,.header_recruit h1,.header_payment_little h1{
     font-size: 28px;
     font-weight: 200;
 }
