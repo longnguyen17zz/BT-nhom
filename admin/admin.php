@@ -19,11 +19,11 @@ function product_pagination()
 {
     global $connect;
     $results_per_page = 4;
-    $query = "Select * from `products`";
-    $result = mysqli_query($connect, $query);
-    $number_of_result = mysqli_num_rows($result);
+    // $query = "Select * from `products`";
+    // $result = mysqli_query($connect, $query);
+    // $number_of_result = mysqli_num_rows($result);
     //determine the total number of pages available  
-    $number_of_page = ceil($number_of_result / $results_per_page);
+    // $number_of_page = ceil($number_of_result / $results_per_page);
     //determine which page number visitor is currently on  
     if (!isset($_GET['page'])) {
         $page = 1;
@@ -41,8 +41,8 @@ function product_pagination()
         $product_title = $row['product_title'];
         $product_price = $row['product_price'];
         $product_description = $row['product_description'];
-        $formatted_price = number_format($product_price, 0, ',', '.') . 'đ';
-        $products_image = $row['products_image'];
+        // $formatted_price = number_format($product_price, 0, ',', '.') . 'đ';
+        // $products_image = $row['products_image'];
         $product_brand = $row['product_brand'];
         $image_url = $row['products_image'];
         echo "<tr>
@@ -181,6 +181,24 @@ function select_product()
 
 <body>
     <main>
+        <?php
+        global $connect;
+        $results_per_page = 4;
+        $query = "SELECT * FROM `products`";
+        $result = mysqli_query($connect, $query);
+        $number_of_result = mysqli_num_rows($result);
+        // Determine the total number of pages available  
+        $number_of_page = ceil($number_of_result / $results_per_page);
+        if(isset($_GET['page'])){
+            $pageURL = intval($_GET['page']);
+            $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+            $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        }else {
+            $pageURL = 1;
+            $pageURLPrev = 1;
+            $pageURLNext = 2;
+        }
+        ?>
         <!--Header-->
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="admin-header">
@@ -280,7 +298,7 @@ function select_product()
                         </table>
                         <ul class='pagination home-product__pagination'>
                             <li class='pagination-item '>
-                                <a href='' class='pagination-item__link'>
+                                <a href='./admin.php?page=<?php echo $pageURLPrev;?>' class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
@@ -290,7 +308,7 @@ function select_product()
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='' class='pagination-item__link'>
+                                <a href='./admin.php?page=<?php echo $pageURLNext;?>' class='pagination-item__link'>
                                     <i class='pagination-item__icon pagination-item__link'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>

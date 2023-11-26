@@ -114,6 +114,24 @@ function display_users_number()
 
 <body>
     <main>
+        <?php
+        global $connect;
+        $results_per_page = 4;
+        $query = "SELECT * FROM `users`";
+        $result = mysqli_query($connect, $query);
+        $number_of_result = mysqli_num_rows($result);
+        // Determine the total number of pages available  
+        $number_of_page = ceil($number_of_result / $results_per_page);
+        if(isset($_GET['page'])){
+            $pageURL = intval($_GET['page']);
+            $pageURLNext = ($pageURL <  $number_of_page) ? ($pageURL + 1) : $pageURL;
+            $pageURLPrev = ($pageURL > 1) ? ($pageURL -1) : $pageURL;
+        }else {
+            $pageURL = 1;
+            $pageURLPrev = 1;
+            $pageURLNext = 2;
+        }
+        ?>
         <!--Header-->
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light" id="admin-header">
@@ -196,7 +214,7 @@ function display_users_number()
                         </table>
                         <ul class='pagination home-product__pagination'>
                             <li class='pagination-item '>
-                                <a href='' class='pagination-item__link'>
+                                <a href='./account_mng.php?page=<?php echo $pageURLPrev;?>' class='pagination-item__link'>
                                     <i class='pagination-item__icon'><i class="fa-solid fa-chevron-left"></i></i>
                                 </a>
                             </li>
@@ -206,7 +224,7 @@ function display_users_number()
                             ?>
 
                             <li class='pagination-item'>
-                                <a href='' class='pagination-item__link'>
+                                <a href='./account_mng.php?page=<?php echo $pageURLNext;?>' class='pagination-item__link'>
                                     <i class='pagination-item__icon pagination-item__link'><i
                                             class="fa-solid fa-chevron-right"></i></i>
                                 </a>

@@ -47,7 +47,7 @@ if (isset($_SESSION['id'])) { //kiem tra id cua nguoi dung ton tai
                     <div class="navbar_header">
                         <div class="navbar-brand">
                             <a href="../homepage.php">
-                                <img src="../assets/Logo.png" class="logo" alt="">
+                                <img src="../assets/Main_logo.png" class="logo" alt="">
                             </a>
                             <span>Trang quản trị</span>
                         </div>
