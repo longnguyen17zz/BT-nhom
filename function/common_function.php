@@ -547,11 +547,11 @@ function cart_preview()
 
         echo '<h4 class="cart-heading">Sản phẩm đã thêm</h4>';
         while ($row = mysqli_fetch_assoc($result_query)) {
-            $product_id = $row['product_id'];
+            // $product_id = $row['product_id'];
             $product_title = $row['product_title'];
-            $product_price = $row['product_price'];
-            $product_description = $row['product_description'];
-            $formatted_price = number_format($product_price, 0, ',', '.') . 'đ';
+            // $product_price = $row['product_price'];
+            // $product_description = $row['product_description'];
+            // $formatted_price = number_format($product_price, 0, ',', '.') . 'đ';
             $product_discount = $row['product_discount'];
             $formatted_discount = number_format($product_discount, 0, ',', '.') . 'đ';
             $products_image = $row['products_image'];
